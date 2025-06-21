@@ -32,7 +32,8 @@ class ProduitController extends AbstractController
 
     #[Route('/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/produit/new', name: 'produit_new')]
+    public function new(Request $request, EntityManagerInterface $em): Response
     {
         $produit = new Produit();
         $produit->setUtilisateur($this->getUser());
@@ -41,10 +42,9 @@ class ProduitController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($produit);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Le produit a été créé avec succès !');
+            $em->persist($produit);
+            $em->flush();
+            $this->addFlash('success', 'Produit ajouté avec succès !');
 
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -56,40 +56,30 @@ class ProduitController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_produit_show', methods: ['GET'])]
+    #[Route('/produit/{id}', name: 'produit_show')]
     public function show(Produit $produit): Response
     {
-        // Vérifier que l'utilisateur peut voir ce produit
-        if (!$this->isGranted('ROLE_ADMIN') && $produit->getUtilisateur() !== $this->getUser()) {
-            throw $this->createAccessDeniedException();
-        }
-
         return $this->render('produit/show.html.twig', [
             'produit' => $produit,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_produit_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
+    #[Route('/produit/{id}/edit', name: 'produit_edit')]
+    public function edit(Request $request, Produit $produit, EntityManagerInterface $em): Response
     {
-        // Vérifier que l'utilisateur peut modifier ce produit
-        if (!$this->isGranted('ROLE_ADMIN') && $produit->getUtilisateur() !== $this->getUser()) {
-            throw $this->createAccessDeniedException();
-        }
-
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Le produit a été modifié avec succès !');
-
-            return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
+            $em->flush();
+            $this->addFlash('success', 'Produit modifié avec succès !');
+            return $this->redirectToRoute('produit_index');
         }
 
         return $this->render('produit/edit.html.twig', [
+            'form' => $form->createView(),
             'produit' => $produit,
-            'form' => $form,
         ]);
     }
 
