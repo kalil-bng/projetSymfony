@@ -20,10 +20,10 @@ class Produit
     #[Assert\Length(min: 2, max: 100, minMessage: 'Le nom doit contenir au moins {{ limit }} caractères')]
     private ?string $nom = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[ORM\Column(type: Types::FLOAT)]
     #[Assert\NotBlank(message: 'Le prix ne peut pas être vide')]
     #[Assert\Positive(message: 'Le prix doit être positif')]
-    private ?string $prix = null;
+    private ?float $prix = null;
 
     #[ORM\Column]
     #[Assert\NotBlank(message: 'La quantité ne peut pas être vide')]
@@ -68,12 +68,12 @@ class Produit
         return $this;
     }
 
-    public function getPrix(): ?string
+    public function getPrix(): ?float
     {
         return $this->prix;
     }
 
-    public function setPrix(string $prix): static
+    public function setPrix(float $prix): static
     {
         $this->prix = $prix;
 

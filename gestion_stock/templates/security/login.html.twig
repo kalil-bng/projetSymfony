@@ -2,12 +2,54 @@
 
 {% block title %}Connexion{% endblock %}
 
+{% block stylesheets %}
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e0eafc 100%);
+        }
+        .card {
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(44, 62, 80, 0.10);
+            background: #ffffff;
+        }
+        .card-header {
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%) !important;
+            color: #fff !important;
+            border-top-left-radius: 18px !important;
+            border-top-right-radius: 18px !important;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #2575fc 0%, #6a11cb 100%);
+            border: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+        }
+        .form-label {
+            color: #2575fc;
+            font-weight: 500;
+        }
+        .card-footer {
+            background: #f8fafc;
+            border-bottom-left-radius: 18px;
+            border-bottom-right-radius: 18px;
+        }
+        .alert-danger {
+            background: #ffe5e9;
+            color: #c0392b;
+            border: none;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-4">
             <div class="card shadow-lg border-0 mt-5">
-                <div class="card-header bg-primary text-white text-center">
+                <div class="card-header text-white text-center">
                     <h4 class="mb-0">
                         <i class="bi bi-box-arrow-in-right"></i> Connexion
                     </h4>

@@ -38,10 +38,8 @@ class ProduitType extends AbstractType
             ])
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
-                'choice_label' => 'nom',
-                'label' => 'Catégorie',
-                'placeholder' => 'Choisir une catégorie',
-                'attr' => ['class' => 'form-select']
+                'choice_label' => 'nom', // ou le champ à afficher
+                'placeholder' => 'Sélectionnez une catégorie',
             ])
         ;
     }
