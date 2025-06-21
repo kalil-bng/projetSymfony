@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon tableau de bord{% endblock %}
+{% block title %}dashboard{% endblock %}
 
 {% block body %}
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">
             <h1 class="mb-4">
-                <i class="bi bi-person-workspace"></i> Mon tableau de bord
+                <i class="bi bi-person-workspace"></i> Dashboard
             </h1>
         </div>
     </div>
@@ -78,7 +78,7 @@
                                     <h6 class="card-title">{{ produit.nom }}</h6>
                                     <p class="card-text">
                                         <small class="text-muted">{{ produit.categorie.nom }}</small><br>
-                                        <strong>{{ produit.prix }}€</strong> - 
+                                        <strong>{{ produit.prix }}GNF</strong> - 
                                         <span class="badge bg-{{ produit.quantite > 5 ? 'success' : 'warning' }}">
                                             {{ produit.quantite }} en stock
                                         </span>

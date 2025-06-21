@@ -27,14 +27,18 @@ class UserType extends AbstractType
                 'attr' => ['class' => 'form-control']
             ])
             ->add('roles', ChoiceType::class, [
-                'label' => 'Rôles',
-                'choices' => [
+                'choices'  => [
                     'Utilisateur' => 'ROLE_USER',
-                    'Administrateur' => 'ROLE_ADMIN'
+                    'Administrateur' => 'ROLE_ADMIN',
                 ],
+                'expanded' => true, // cases à cocher
                 'multiple' => true,
-                'expanded' => true,
-                'attr' => ['class' => 'mt-2']
+                'label' => 'Rôles',
+            ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'J\'accepte les termes et conditions',
+                'mapped' => false,
+                'attr' => ['class' => 'form-check-input'],
             ]);
 
         // Ajouter le champ password uniquement pour la création
